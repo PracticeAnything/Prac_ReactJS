@@ -1,6 +1,7 @@
 import React from 'react';
 import ContactInfo from './ContactInfo';
 import ContactDetails from './ContactDetails';
+import ContactCreate from './ContactCreate';
 import update from 'react-addons-update';
 
 export default class Contact extends React.Component{
@@ -40,7 +41,7 @@ export default class Contact extends React.Component{
 
  handleCreate(contact){
      this.setState({
-       contacData:update(this.state.contactData,{$push:[contact]})
+       contactData:update(this.state.contactData,{$push:[contact]})
      });
  }
 
@@ -60,7 +61,7 @@ handleEdit(name,phone){
         phone:{$set:phone}
       }
     })
-  })
+  });
 }
   render(){
     const mapToComponent = (data)=>{
@@ -89,6 +90,7 @@ handleEdit(name,phone){
         <ContactDetails
           isSelected={this.state.selectedKey != -1}
           contact={this.state.contactData[this.state.selectedKey]}/>
+          <ContactCreate onCreate={this.handleCreate}/>
       </div>
     );
   }
